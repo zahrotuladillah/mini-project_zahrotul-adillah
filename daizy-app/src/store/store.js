@@ -7,10 +7,12 @@ import { persistReducer, persistStore,
     PURGE,
     REGISTER,} from "redux-persist";
 import storage from 'redux-persist/lib/storage'
-import ListSlice from "./ListSlice";
+import ListPemasukanSlice from "./ListPemasukanSlice";
+import ListPengeluaranSlice from "./ListPengeluaranSlice";
 
 const reducers = combineReducers({
-    list: ListSlice
+    listPemasukan: ListPemasukanSlice,
+    listPengeluaran: ListPengeluaranSlice
 })
 
 const persistConfig = {

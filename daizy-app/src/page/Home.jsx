@@ -1,9 +1,13 @@
 import List from "./component/List"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 export default function Home(){
     const [filter, setFilter] = useState('pemasukan')
+    const dataPemasukan = useSelector((state)=>state.listPemasukan.pemasukan)
+    // const dataPengeluaran = useSelector((state)=>state.list.pengeluaran)
+    // const dataRencana = useSelector((state)=>state.list.rencana)
 
     const handleClick = e => {
         setFilter(e.target.value)
@@ -44,9 +48,24 @@ export default function Home(){
                     <div>ArrowRight</div>
                 </div>
                 <section style={{marginBottom: '10%'}}>
-                    {filter==='pemasukan' && <List filter='pemasukan'/>}
-                    {filter==='pengeluaran' && <List filter='pengeluaran'/>}
-                    {filter==='rencana' && <List filter='rencana'/>}
+                    {filter==='pemasukan' && dataPemasukan.map((income) => (<List key={income.id} item={income} filter='pemasukan'/>))}
+                    {/* {filter==='pengeluaran' && dataPengeluaran.map((outcome) => (<List key={outcome.id} item={outcome} filter='pengeluaran'/>))}
+                    {filter==='rencana' && dataRencana.map((plan) => (<List key={plan.id} item={plan} filter='rencana'/>))} */}
+                    {dataPemasukan.length===0 &&
+                        <div className="task" style={{textAlign: "center", margin: "0", color: "red"}}>
+                            Belum Ada Pemasukan
+                        </div>
+                    }
+                    {/* {dataPengeluaran.length===0 &&
+                        <div className="task" style={{textAlign: "center", margin: "0", color: "red"}}>
+                            Belum Ada Pengeluaran
+                        </div>
+                    }
+                    {dataRencana.length===0 &&
+                        <div className="task" style={{textAlign: "center", margin: "0", color: "red"}}>
+                            Belum Ada Rencana Tabungan
+                        </div>
+                    } */}
                 </section>
             </div>
         </div>
