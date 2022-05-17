@@ -1,17 +1,45 @@
 import List from "./component/List"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
+// import useGetPemasukan from "../hooks/useGetPemasukan"
+import { gql, useQuery } from "@apollo/client"
+
+const GetPemasukan = gql`
+    query getDataPemasukan {
+        pemasukan {
+            id
+            nama
+            nominal
+            tanggal
+            keterangan
+        }
+    }
+`
 
 export default function Home(){
     const [filter, setFilter] = useState('pemasukan')
-    const dataPemasukan = useSelector((state)=>state.listPemasukan.pemasukan)
+    // const {list_pemasukan, loadingDataPemasukan, errorDataPemasukan, subscribePemasukanFunction} = useGetDataPemasukan()
+    // const dataPemasukan = useSelector((state)=>state.listPemasukan.pemasukan)
     // const dataPengeluaran = useSelector((state)=>state.list.pengeluaran)
     // const dataRencana = useSelector((state)=>state.list.rencana)
+    const {data, loading, error} = useQuery(GetPemasukan)
+    // const {data, load, error, subsPemasukan} = useGetPemasukan() 
 
+    // useEffect(()=>{
+    //     subscribePemasukanFunction()
+    // },[])
+    useEffect(()=>{
+        subsPemasukan()
+    },[])
+
+    // if(errorDataPemasukan){
+    //     console.log("error get data pemasukan")
+    // }
     const handleClick = e => {
         setFilter(e.target.value)
     }
+    
     return(
         <div>
             <section className="home second">
@@ -48,14 +76,17 @@ export default function Home(){
                     <div>ArrowRight</div>
                 </div>
                 <section style={{marginBottom: '10%'}}>
-                    {filter==='pemasukan' && dataPemasukan.map((income) => (<List key={income.id} item={income} filter='pemasukan'/>))}
+                    {/* {console.log("hlo")} */}
+                    {/* {list_pemasukan?.pemasukan && console.log("hwe")} */}
+                    {filter==='pemasukan' && data.map(income => (<List key={income.id} item={income} filter='pemasukan'/>))}
+                    
                     {/* {filter==='pengeluaran' && dataPengeluaran.map((outcome) => (<List key={outcome.id} item={outcome} filter='pengeluaran'/>))}
                     {filter==='rencana' && dataRencana.map((plan) => (<List key={plan.id} item={plan} filter='rencana'/>))} */}
-                    {dataPemasukan.length===0 &&
+                    {/* {list_pemasukan?.length===0 &&
                         <div className="task" style={{textAlign: "center", margin: "0", color: "red"}}>
                             Belum Ada Pemasukan
                         </div>
-                    }
+                    } */}
                     {/* {dataPengeluaran.length===0 &&
                         <div className="task" style={{textAlign: "center", margin: "0", color: "red"}}>
                             Belum Ada Pengeluaran
