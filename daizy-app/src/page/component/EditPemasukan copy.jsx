@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux'
-// import { addPemasukan } from "../../store/ListPemasukanSlice"
+// import { addPemasukan, editPemasukan } from "../../store/ListPemasukanSlice"
 
-export default function TambahPemasukan(){
-    const [data, setData] = useState({nama: "", nominal: 0, tanggal: "", keterangan: ""})
-    // const dispatch = useDispatch(addPemasukan)
+export default function EditPemasukan(props){
+    const [item] = props.param
+    const [data, setData] = useState(item)
+    // const dispatch = useDispatch(editPemasukan)
 
     const scrollToTop = () =>{
         window.scrollTo({
@@ -21,25 +22,9 @@ export default function TambahPemasukan(){
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(data)
-        if(data.nama){
-            if(data.nominal){
-                if(data.tanggal){
-                    const newItem = {nama: data.nama, nominal: data.nominal, tanggal: data.tanggal, keterangan: data.keterangan}
-                    // dispatch(addPemasukan(newItem))
-                    setData({nama: "", nominal: 0, tanggal: "", keterangan: ""})
-                }
-                else{
-                    alert("Isi Tanggal Terlebih Dahulu")
-                }
-            }
-            else{
-                alert("Nominal Masih Kosong")
-            }
-        }
-        else{
-            alert("Nama Pemasukan Masih Kosong")
-        }
+        // console.log(data.nama)
+        const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, tanggal: data.tanggal, keterangan: data.keterangan}
+        // dispatch(editPemasukan(newItem))
     }
     return(
         <div className="addpemasukan">
@@ -52,28 +37,28 @@ export default function TambahPemasukan(){
                             <div className="name">
                                 <label>
                                     Nama Pemasukan
-                                    <input type="text" required name="nama" onChange={handleChange}
+                                    <input type="text" required name="nama" value={data.nama} onChange={handleChange}
                                     className="input" />
                                 </label>
                             </div>
                             <div className="nominal">
                                 <label>
                                     Nominal Pemasukan
-                                    <input type="number" required name="nominal" onChange={handleChange} 
+                                    <input type="number" required name="nominal" value={data.nominal} onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
                             <div className="tanggal">
                                 <label>
                                     Tanggal Pemasukan
-                                    <input type="date" required name="tanggal" onChange={handleChange} 
+                                    <input type="date" required name="tanggal" value={data.tanggal} onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
                         <div className="keterangan">
                             <label>
                                 Keterangan
-                                <textarea name="keterangan" onChange={handleChange} 
+                                <textarea name="keterangan" value={data.keterangan} onChange={handleChange} 
                                 rows="7"></textarea>
                             </label>
                         </div>

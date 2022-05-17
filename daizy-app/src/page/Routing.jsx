@@ -6,6 +6,7 @@ import Home from "./Home";
 import TambahPemasukan from "./component/TambahPemasukan";
 import TambahPengeluaran from "./component/TambahPengeluaran";
 import TambahRencana from "./component/TambahRencana";
+import EditPemasukan from "./component/EditPemasukan copy";
 import Grafik from "./component/Grafik";
 import './style.css'
 
@@ -18,6 +19,7 @@ export default function Routing() {
         <Route path="/" element={<Welcome />}/>
         <Route path="/Home" element={<Home />}/> 
         <Route path="/TambahPemasukan" element={<TambahPemasukan />}/>
+        <Route path="/EditPemasukan/:id" element={<EditPemasukan />}/>
         <Route path="/TambahPengeluaran" element={<TambahPengeluaran />}/>
         <Route path="/TambahRencana" element={<TambahRencana />}/>
         <Route path="/Grafik" element={<Grafik />}/>

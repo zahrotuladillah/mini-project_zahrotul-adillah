@@ -1,22 +1,30 @@
+import { Link } from "react-router-dom"
+import { useState } from "react";
 
+export default function List(props){
+    const {item, filter} = props
+    // const [show, setShow] = useState(false);
 
-export default function List({filter}){
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
+    console.log("halo")
+
     return(
         <section>
             {filter==='pemasukan' && 
-            <div className="list" style={{backgroundColor: '#ACB5E9'}}>
-                <div>Pemasukan 1</div>
-                <div>Tanggal</div>
+            <div to={{pathname: `/editPemasukan/${item.id}`, param: item}} className="list" style={{backgroundColor: '#ACB5E9'}}>
+                <div>{item.nama}</div>
+                <div>{item.tanggal}</div>
             </div>}
             {filter==='pengeluaran' && 
             <div className="list" style={{backgroundColor: '#F5ACA8'}}>
-                <div>Pemasukan 1</div>
-                <div>Tanggal</div>
+                <div>{item.nama}</div>
+                <div>{item.tanggal}</div>
             </div>}
             {filter==='rencana' && 
             <div className="list" style={{backgroundColor: '#FBC3A5'}}>
-                <div>Pemasukan 1</div>
-                <div>Tanggal</div>
+                <div>{item.nama}</div>
+                <div>{item.tanggal}</div>
             </div>}
             
         </section>
