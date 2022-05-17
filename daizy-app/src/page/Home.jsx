@@ -2,20 +2,20 @@ import List from "./component/List"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 // import { useSelector } from "react-redux"
-// import useGetPemasukan from "../hooks/useGetPemasukan"
+import useGetPemasukan from "../hooks/useGetPemasukan"
 import { gql, useQuery } from "@apollo/client"
 
-const GetPemasukan = gql`
-    query getDataPemasukan {
-        pemasukan {
-            id
-            nama
-            nominal
-            tanggal
-            keterangan
-        }
-    }
-`
+// const GetPemasukan = gql`
+//     query getDataPemasukan {
+//         pemasukan {
+//             id
+//             nama
+//             nominal
+//             tanggal
+//             keterangan
+//         }
+//     }
+// `
 
 export default function Home(){
     const [filter, setFilter] = useState('pemasukan')
@@ -23,8 +23,8 @@ export default function Home(){
     // const dataPemasukan = useSelector((state)=>state.listPemasukan.pemasukan)
     // const dataPengeluaran = useSelector((state)=>state.list.pengeluaran)
     // const dataRencana = useSelector((state)=>state.list.rencana)
-    const {data, loading, error} = useQuery(GetPemasukan)
-    // const {data, load, error, subsPemasukan} = useGetPemasukan() 
+    // const {data, loading, error} = useQuery(GetPemasukan)
+    const {data, load, error, subsPemasukan} = useGetPemasukan() 
 
     // useEffect(()=>{
     //     subscribePemasukanFunction()
