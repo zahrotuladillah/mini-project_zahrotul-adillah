@@ -13,22 +13,45 @@ export default function List(props){
     const {deletePengeluaran, loadingDelatePengeluaran} = useDeletePengeluaran()
     const {deleteRencana, loadingDeleteRencana} = useDeleteRencana()
     const {item, filter} = props
-    const [parameter, setParam] = useState({id: 0, nama: "", nominal: 0, tanggal: "", keterangan: ""})
+    const [parameterPemasukan, setParamPemasukan] = useState({id: 0, nama: "", nominal: 0, tanggal: "", keterangan: ""})
+    const [parameterPengeluaran, setParamPengeluaran] = useState({id: 0, nama: "", nominal: 0,jenis:"", tanggal: "", keterangan: ""})
+    const [parameterRencana, setParamRencana] = useState({id: 0, nama: "", nominal: 0, bulan: "", keterangan: ""})
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
         console.log("halo")
-        setParam({id: 0, nama: "", nominal: 0, tanggal: "", keterangan: ""})
+        setParamPemasukan({id: 0, nama: "", nominal: 0, tanggal: "", keterangan: ""})
         setShow(false)
     };
-    const handleShow = () => {
+    const handleShowPemasukan = () => {
         setShow(true)
-        setParam({
+        setParamPemasukan({
             id: item.id,
             nama: item.nama,
             nominal: item.nominal,
             tanggal: item.tanggal,
+            keterangan: item.keterangan
+        })
+    };
+    const handleShowPengeluaran = () => {
+        setShow(true)
+        setParamPengeluaran({
+            id: item.id,
+            nama: item.nama,
+            nominal: item.nominal,
+            jenis: item.jenis,
+            tanggal: item.tanggal,
+            keterangan: item.keterangan
+        })
+    };
+    const handleShowRencana = () => {
+        setShow(true)
+        setParamRencana({
+            id: item.id,
+            nama: item.nama,
+            nominal: item.nominal,
+            bulan: item.bulan,
             keterangan: item.keterangan
         })
     };
@@ -59,7 +82,7 @@ export default function List(props){
             {show===false &&
                 <section className="item">
                     {filter==='pemasukan' && 
-                    <div onClick={handleShow}
+                    <div onClick={handleShowPemasukan}
                     // to={{pathname: `/editPemasukan/${item.id}`, param: item}} 
                     className="list" style={{backgroundColor: '#ACB5E9'}}>
                         <div>{item.nama}</div>
@@ -67,13 +90,13 @@ export default function List(props){
                     </div>
                     }
                     {filter==='pengeluaran' && 
-                    <div onClick={handleShow} className="list" style={{backgroundColor: '#F5ACA8'}}>
+                    <div onClick={handleShowPengeluaran} className="list" style={{backgroundColor: '#F5ACA8'}}>
                         <div>{item.nama}</div>
                         <div>{item.tanggal}</div>
                         <div>{item.jenis}</div>
                     </div>}
                     {filter==='rencana' && 
-                    <div onClick={handleShow} className="list" style={{backgroundColor: '#FBC3A5'}}>
+                    <div onClick={handleShowRencana} className="list" style={{backgroundColor: '#FBC3A5'}}>
                         <div>{item.nama}</div>
                         <div>{item.tanggal}</div>
                     </div>}
@@ -91,9 +114,9 @@ export default function List(props){
             {show===true && 
                 <div>
                     <div>
-                        {filter==='pemasukan' && <EditPemasukan item={parameter}/>} 
-                        {filter==='pengeluaran' && <EditPengeluaran item={parameter}/>}
-                        {filter==='rencana' && <EditRencana item={parameter}/>}
+                        {filter==='pemasukan' && <EditPemasukan item={parameterPemasukan}/>} 
+                        {filter==='pengeluaran' && <EditPengeluaran item={parameterPengeluaran}/>}
+                        {filter==='rencana' && <EditRencana item={parameterRencana}/>}
                     </div>
                     <div onClick={handleClose} className="done-edit-button">Selesai</div>
                 </div>
