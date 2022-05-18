@@ -305,19 +305,20 @@ textarea{
     text-align: center;
     vertical-align: middle;
     padding: 0 5%;
-}
-.item{
     font-size: 20px;
     font-weight: 600;
+}
+.item{
     margin-top: 3%;
     display: flex;
     justify-content: space-between;
 }
 .delete-button{
+    font-size: 20px;
     text-align: center;
     vertical-align: middle;
     color: black;
-    width: 7%;
+    width: 10%;
     height: 60px;
     line-height: 60px;
     background-color: var(--red-color);
@@ -465,6 +466,13 @@ textarea{
         padding: 0 3%;
         height: 30px;
         line-height: 30px;
+        width: 75%;
+    }
+    .delete-button{
+        height: 30px;
+        line-height: 30px;
+        font-size: 12px;
+        width: 20%;
     }
 }
 @media screen and (min-width: 481px) and (max-width:1400px){
@@ -516,6 +524,13 @@ textarea{
         font-size: 15px;
         height: 40px;
         line-height: 40px;
+        width: 80%;
+    }
+    .delete-button{
+        font-size: 15px;
+        height: 40px;
+        line-height: 40px;
+        width: 15%;
     }
     /* Main */
     .title-fitur{
