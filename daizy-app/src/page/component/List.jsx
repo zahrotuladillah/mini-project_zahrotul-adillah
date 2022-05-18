@@ -2,10 +2,12 @@ import { Link } from "react-router-dom"
 import { useState } from "react";
 import useDeletePemasukan from "../../hooks/useDeletePemasukan";
 import useDeletePengeluaran from "../../hooks/useDeletePengeluaran";
+import useDeleteRencana from "../../hooks/useDeleteRencana";
 
 export default function List(props){
     const {deletePemasukan, loadingDeletePemasukan} = useDeletePemasukan()
     const {deletePengeluaran, loadingDelatePengeluaran} = useDeletePengeluaran()
+    const {deleteRencana, loadingDeleteRencana} = useDeleteRencana()
     const {item, filter} = props
     // const [show, setShow] = useState(false);
 
@@ -21,8 +23,14 @@ export default function List(props){
     }
 
     const handleHapusPengeluaran = () => {
-        console.log("hem", item)
+        // console.log("hem", item)
         deletePengeluaran({variables:{
+            id: item.id
+        }})
+    }
+    const handleHapusRencana = () => {
+        console.log("hem", item)
+        deleteRencana({variables:{
             id: item.id
         }})
     }
@@ -53,6 +61,9 @@ export default function List(props){
             }
             {filter==='pengeluaran' &&
                 <div className="delete-button" onClick={handleHapusPengeluaran}>Hapus</div>
+            }
+            {filter==='rencana' &&
+                <div className="delete-button" onClick={handleHapusRencana}>Hapus</div>
             }
         </section>
     )
