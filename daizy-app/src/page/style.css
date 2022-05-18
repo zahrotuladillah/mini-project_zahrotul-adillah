@@ -362,6 +362,19 @@ textarea{
     justify-content: space-between;
 }
 
+.edit-rencana{
+    background-color: var(--third-color);
+    margin: 3% auto 0 auto;
+    position: absolute;
+    width: 80%;
+}
+
+.preform-edit{
+    background-color: white;
+    padding: 5%;
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 480px) {
     /* Main */
     .title-fitur{
@@ -389,8 +402,11 @@ textarea{
     }
     .button{
         font-size: small;
-        width: 120px;
-        line-height: 20px;
+        width: 130px;
+    }
+    .submit{
+        font-size: small;
+        width: 130px;
     }
     .preform{
         padding: 5%;
@@ -473,6 +489,28 @@ textarea{
         line-height: 30px;
         font-size: 12px;
         width: 20%;
+    }
+}
+@media screen and (max-width:321px){
+    .preform-edit{
+        width: 100%;
+    }
+    .input{
+        width: 230px;
+    }
+    textarea{
+        width: 230px;
+    }
+}
+@media screen and (min-width: 322px) and (max-width:376px){
+    .preform-edit{
+        width: 100%;
+    }
+    .input{
+        width: 260px;
+    }
+    textarea{
+        width: 260px;
     }
 }
 @media screen and (min-width: 481px) and (max-width:1400px){

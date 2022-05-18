@@ -76,9 +76,11 @@ export default function List(props){
             }
             {show===true && 
                 <div>
-                    {filter==='pemasukan' && <EditPemasukan item={item}/>} 
-                    {filter==='pengeluaran' && <EditPengeluaran item={item}/>}
-                    {filter==='rencana' && <EditRencana item={item}/>}
+                    <div>
+                        {filter==='pemasukan' && <EditPemasukan item={item}/>} 
+                        {filter==='pengeluaran' && <EditPengeluaran item={item}/>}
+                        {filter==='rencana' && <EditRencana item={item}/>}
+                    </div>
                     <div onClick={handleClose} className="done-edit-button">Selesai</div>
                 </div>
             }
