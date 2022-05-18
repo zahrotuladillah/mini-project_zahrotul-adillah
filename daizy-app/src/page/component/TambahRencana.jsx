@@ -55,7 +55,7 @@ export default function TambahRencana(){
         }
     }
     return(
-        <div className="center addrencana">
+        <div className="addrencana">
             <div className="title" style={{textAlign: 'center'}}>Rencana Tabungan</div>
             <div className='align-items-center justify-content-center' style={{display: 'flex'}}>
                 <div className="preform">
