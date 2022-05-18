@@ -67,28 +67,28 @@ export default function TambahPemasukan(){
                             <div className="name">
                                 <label>
                                     Nama Pemasukan
-                                    <input type="text" name="nama" onChange={handleChange}
+                                    <input type="text" name="nama" value={data.nama} onChange={handleChange}
                                     className="input" />
                                 </label>
                             </div>
                             <div className="nominal">
                                 <label>
                                     Nominal Pemasukan
-                                    <input type="number" name="nominal" onChange={handleChange} 
+                                    <input type="number" name="nominal" value={data.nominal} onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
                             <div className="tanggal">
                                 <label>
                                     Tanggal Pemasukan
-                                    <input type="date" name="tanggal" onChange={handleChange} 
+                                    <input type="date" name="tanggal" value={data.tanggal} onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
                         <div className="keterangan">
                             <label>
                                 Keterangan
-                                <textarea name="keterangan" onChange={handleChange} 
+                                <textarea name="keterangan" value={data.keterangan} onChange={handleChange} 
                                 rows="7"></textarea>
                             </label>
                         </div>
