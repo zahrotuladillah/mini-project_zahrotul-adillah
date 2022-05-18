@@ -16,7 +16,6 @@ export default function Home(){
     const {data: dataPemasukan, loading: loadPemasukan, error: errorPemasukan, subsPemasukan} = useGetPemasukan() 
     const {data: dataPengeluaran, loading: loadingPengelauran, error: errorPengeluaran, subsPengeluaran} = useGetPengeluaran()
     const {data: dataRencana, loading: loadingRencana, error: errorRencana, subsRencana} = useGetRencana()
-
     // useEffect(()=>{
     //     subscribePemasukanFunction()
     // },[])
