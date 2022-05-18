@@ -21,8 +21,8 @@ import { gql } from "@apollo/client";
 //     }
 // `
 export const AddDataPemasukan = gql`
-    mutation addDataPemasukan($object: pemasukan_insert_input!) {
-        insert_pemasukan_one(objects: {object: $object}) {
+    mutation AddDataPemasukan($object: pemasukan_insert_input!) {
+        insert_pemasukan_one(object: $object) {
             id
             nama
             nominal

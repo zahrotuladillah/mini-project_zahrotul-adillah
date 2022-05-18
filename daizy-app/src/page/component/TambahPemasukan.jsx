@@ -3,7 +3,10 @@ import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux'
 // import { addPemasukan } from "../../store/ListPemasukanSlice"
 
+import useAddPemasukan from "../../hooks/useAddPemasukan"
+
 export default function TambahPemasukan(){
+    const {addPemasukan, loadingAdd} = useAddPemasukan()
     const [data, setData] = useState({nama: "", nominal: 0, tanggal: "", keterangan: ""})
     // const dispatch = useDispatch(addPemasukan)
 
@@ -12,6 +15,18 @@ export default function TambahPemasukan(){
             top: 0, 
             behavior: 'smooth'
         });
+    };
+
+    const onTambahPemasukan = async(newItem) => {
+        await addPemasukan({variables: {
+            object: {
+                nama: newItem.nama,
+                nominal: newItem.nominal,
+                tanggal: newItem.tanggal,
+                keterangan: newItem.keterangan
+            }
+        }})
+        alert("Data Berhasil Ditambahkan")
     };
 
     const handleChange = e => {
@@ -26,7 +41,7 @@ export default function TambahPemasukan(){
             if(data.nominal){
                 if(data.tanggal){
                     const newItem = {nama: data.nama, nominal: data.nominal, tanggal: data.tanggal, keterangan: data.keterangan}
-                    // dispatch(addPemasukan(newItem))
+                    onTambahPemasukan(newItem)
                     setData({nama: "", nominal: 0, tanggal: "", keterangan: ""})
                 }
                 else{
@@ -52,21 +67,21 @@ export default function TambahPemasukan(){
                             <div className="name">
                                 <label>
                                     Nama Pemasukan
-                                    <input type="text" required name="nama" onChange={handleChange}
+                                    <input type="text" name="nama" onChange={handleChange}
                                     className="input" />
                                 </label>
                             </div>
                             <div className="nominal">
                                 <label>
                                     Nominal Pemasukan
-                                    <input type="number" required name="nominal" onChange={handleChange} 
+                                    <input type="number" name="nominal" onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
                             <div className="tanggal">
                                 <label>
                                     Tanggal Pemasukan
-                                    <input type="date" required name="tanggal" onChange={handleChange} 
+                                    <input type="date" name="tanggal" onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>

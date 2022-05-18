@@ -294,14 +294,38 @@ textarea{
     justify-content: space-evenly;
 }
 .list{
-    margin-top: 5%;
     display: flex;
     justify-content: space-between;
-    padding: 1% 5%;
+    /* padding: 1% 5%; */
     border-radius: 10px;
     background-color: var(--first-color);
+    width: 85%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0 5%;
+}
+.item{
     font-size: 20px;
     font-weight: 600;
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+.delete-button{
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    width: 7%;
+    height: 60px;
+    line-height: 60px;
+    background-color: var(--red-color);
+    border-radius: 5px;
+}
+.delete-button:hover{
+    background-color: black;
+    color: white;
 }
 
 /* Grafik */
@@ -438,7 +462,9 @@ textarea{
         font-size: 12px;
         font-weight: 500;
         border-radius: 5px;
-        padding: 2% 3%;
+        padding: 0 3%;
+        height: 30px;
+        line-height: 30px;
     }
 }
 @media screen and (min-width: 481px) and (max-width:1400px){
@@ -488,6 +514,8 @@ textarea{
     }
     .list{
         font-size: 15px;
+        height: 40px;
+        line-height: 40px;
     }
     /* Main */
     .title-fitur{
