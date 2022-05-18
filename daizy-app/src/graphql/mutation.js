@@ -57,6 +57,20 @@ export const AddDataRencana = gql`
     }
 ` 
 
+export const UpdateDataPemasukan = gql`
+    mutation UpdateDataPemasukan($_eq: Int!, $_set: pemasukan_set_input!) {
+        update_pemasukan(where: {id: {_eq: $_eq}}, _set: $_set) {
+            returning {
+                id
+                nama
+                nominal
+                tanggal
+                keterangan
+            }
+        }
+    }
+`
+
 export const DeleteDataPemasukan = gql`
     mutation deleteDataPemasukan($id: Int!) {
         delete_pemasukan_by_pk(id: $id) {
