@@ -33,11 +33,12 @@ export const AddDataPemasukan = gql`
 `
 
 export const AddDataPengeluaran = gql`
-    mutation addDataPengeluaran($object: pengeluaran_insert_input!) {
-        insert_pengeluaran_one(object: {object: $object}) {
+    mutation AddDataPengeluaran($object: pengeluaran_insert_input!) {
+        insert_pengeluaran_one(object: $object) {
             id
             nama
             nominal
+            jenis
             tanggal
             keterangan
         }
@@ -46,7 +47,7 @@ export const AddDataPengeluaran = gql`
 
 export const AddDataRencana = gql`
     mutation addDataRencana($object: rencana_insert_input!) {
-        insert_rencana_one(object: {object: $object}) {
+        insert_rencana_one(object: $object) {
             id
             nama
             nominal

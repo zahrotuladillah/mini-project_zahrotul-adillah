@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux'
 // import { addPemasukan, editPemasukan } from "../../store/ListPemasukanSlice"
 
-export default function EditPemasukan(props){
-    const [item] = props.param
+export default function EditRencana(props){
+    const [item] = props.item
     const [data, setData] = useState(item)
     // const dispatch = useDispatch(editPemasukan)
 

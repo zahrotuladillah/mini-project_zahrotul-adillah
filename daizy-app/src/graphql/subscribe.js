@@ -29,6 +29,7 @@ export const SubscribeDataPengeluaran = gql`
             id
             nama
             nominal
+            jenis
             tanggal
             keterangan
         }
