@@ -1,22 +1,32 @@
 import { Link } from "react-router-dom"
 import { useState } from "react";
 import useDeletePemasukan from "../../hooks/useDeletePemasukan";
+import useDeletePengeluaran from "../../hooks/useDeletePengeluaran";
 
 export default function List(props){
-    const {deletePemasukan, loadingDelete} = useDeletePemasukan()
+    const {deletePemasukan, loadingDeletePemasukan} = useDeletePemasukan()
+    const {deletePengeluaran, loadingDelatePengeluaran} = useDeletePengeluaran()
     const {item, filter} = props
     // const [show, setShow] = useState(false);
 
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-    console.log("halo")
+    // console.log("halo")
 
-    const handleHapus = () => {
-        console.log("nyew", item.id)
+    const handleHapusPemasukan = () => {
+        // console.log("nyew", item.id)
         deletePemasukan({variables: {
             id: item.id
         }})
     }
+
+    const handleHapusPengeluaran = () => {
+        console.log("hem", item)
+        deletePengeluaran({variables:{
+            id: item.id
+        }})
+    }
+    console.log("yo", item)
     return(
         <section className="item">
             {filter==='pemasukan' && 
@@ -31,13 +41,19 @@ export default function List(props){
             <div className="list" style={{backgroundColor: '#F5ACA8'}}>
                 <div>{item.nama}</div>
                 <div>{item.tanggal}</div>
+                <div>{item.jenis}</div>
             </div>}
             {filter==='rencana' && 
             <div className="list" style={{backgroundColor: '#FBC3A5'}}>
                 <div>{item.nama}</div>
                 <div>{item.tanggal}</div>
             </div>}
-            <div className="delete-button" onClick={handleHapus}>Hapus</div>
+            {filter==='pemasukan' &&
+                <div className="delete-button" onClick={handleHapusPemasukan}>Hapus</div>
+            }
+            {filter==='pengeluaran' &&
+                <div className="delete-button" onClick={handleHapusPengeluaran}>Hapus</div>
+            }
         </section>
     )
 }

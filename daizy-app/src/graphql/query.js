@@ -18,6 +18,7 @@ export const GetDataPengeluaran = gql`
             id
             nama
             nominal
+            jenis
             tanggal
             keterangan
         }
