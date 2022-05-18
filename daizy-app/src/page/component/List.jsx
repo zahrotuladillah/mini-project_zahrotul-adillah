@@ -13,11 +13,25 @@ export default function List(props){
     const {deletePengeluaran, loadingDelatePengeluaran} = useDeletePengeluaran()
     const {deleteRencana, loadingDeleteRencana} = useDeleteRencana()
     const {item, filter} = props
+    const [parameter, setParam] = useState({id: 0, nama: "", nominal: 0, tanggal: "", keterangan: ""})
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        console.log("halo")
+        setParam({id: 0, nama: "", nominal: 0, tanggal: "", keterangan: ""})
+        setShow(false)
+    };
+    const handleShow = () => {
+        setShow(true)
+        setParam({
+            id: item.id,
+            nama: item.nama,
+            nominal: item.nominal,
+            tanggal: item.tanggal,
+            keterangan: item.keterangan
+        })
+    };
     // console.log("halo")
 
     const handleHapusPemasukan = () => {
@@ -76,9 +90,11 @@ export default function List(props){
             }
             {show===true && 
                 <div>
-                    {filter==='pemasukan' && <EditPemasukan item={item}/>} 
-                    {filter==='pengeluaran' && <EditPengeluaran item={item}/>}
-                    {filter==='rencana' && <EditRencana item={item}/>}
+                    <div>
+                        {filter==='pemasukan' && <EditPemasukan item={parameter}/>} 
+                        {filter==='pengeluaran' && <EditPengeluaran item={parameter}/>}
+                        {filter==='rencana' && <EditRencana item={parameter}/>}
+                    </div>
                     <div onClick={handleClose} className="done-edit-button">Selesai</div>
                 </div>
             }
