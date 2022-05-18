@@ -362,6 +362,13 @@ textarea{
     justify-content: space-between;
 }
 
+.edit-pengeluaran{
+    margin: 3% auto 0 auto;
+    width: 80%;
+    background-color: var(--second-color);
+    position: absolute;
+}
+
 @media screen and (max-width: 480px) {
     /* Main */
     .title-fitur{
