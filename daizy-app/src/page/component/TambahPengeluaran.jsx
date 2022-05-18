@@ -67,21 +67,21 @@ export default function TambahPengeluaran(){
                         <div className="name">
                             <label>
                                 Nama Pengeluaran
-                                <input type="text" name="nama" onChange={handleChange} 
+                                <input type="text" name="nama" value={data.nama} onChange={handleChange} 
                                 className="input" />
                             </label>
                         </div>
                         <div className="nominal">
                             <label>
                                 Nominal Pengeluaran
-                                <input type="number" name="nominal" onChange={handleChange} 
+                                <input type="number" name="nominal" value={data.nominal} onChange={handleChange} 
                                 className="input" />
                             </label>
                         </div>
                         <div className="jenis">
                                 <label>
                                     Jenis Pengeluaran
-                                    <select className="input" name="jenis" defaultValue={"default"} onChange={handleChange}
+                                    <select className="input" name="jenis" value={data.jenis} defaultValue={"default"} onChange={handleChange}
                                     >
                                         <option value="default">Pilih Jenis Pengeluaran</option>
                                         <option value="Pekerjaan dan Belajar">Pekerjaan dan Belajar</option>
@@ -96,14 +96,14 @@ export default function TambahPengeluaran(){
                         <div className="tanggal">
                             <label>
                                 Tanggal Pengeluaran
-                                <input type="date" name="tanggal" onChange={handleChange} 
+                                <input type="date" name="tanggal" value={data.tanggal} onChange={handleChange} 
                                 className="input" />
                             </label>
                         </div>
                         <div className="keterangan">
                             <label>
                                 Keterangan
-                                <textarea name="keterangan" onChange={handleChange} 
+                                <textarea name="keterangan" value={data.keterangan} onChange={handleChange} 
                                 rows="7"></textarea>
                             </label>
                         </div>
