@@ -3,19 +3,6 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 // import { useSelector } from "react-redux"
 import useGetPemasukan from "../hooks/useGetPemasukan"
-import { gql, useQuery } from "@apollo/client"
-
-// const GetPemasukan = gql`
-//     query getDataPemasukan {
-//         pemasukan {
-//             id
-//             nama
-//             nominal
-//             tanggal
-//             keterangan
-//         }
-//     }
-// `
 
 export default function Home(){
     const [filter, setFilter] = useState('pemasukan')
@@ -55,9 +42,9 @@ export default function Home(){
             </section>
             <img src="./waveatas.png" style={{width: '100%', marginTop: '-5px'}}/>
             <div className="max-width">
-                {filter==='pemasukan' && <Link style={{display: 'grid'}} className="tambahbutton" to='/TambahPemasukan'>Tambah Pemasukan</Link>}
-                {filter==='pengeluaran' && <Link style={{display: 'grid'}} className="tambahbutton" to='/TambahPengeluaran'>Tambah Pengeluaran</Link>}
-                {filter==='rencana' && <Link style={{display: 'grid'}} className="tambahbutton" to='/TambahRencana'>Tambah Rencana</Link>}
+                {filter==='pemasukan' && <Link to='/TambahPemasukan' style={{display: 'grid'}} className="tambahbutton" >Tambah Pemasukan</Link>}
+                {filter==='pengeluaran' && <Link to='/TambahPengeluaran' style={{display: 'grid'}} className="tambahbutton" >Tambah Pengeluaran</Link>}
+                {filter==='rencana' && <Link to='/TambahRencana' style={{display: 'grid'}} className="tambahbutton" >Tambah Rencana</Link>}
                 <div className="filter">
                     {filter==='pemasukan'
                     ? <button className="filterbutton" onClick={handleClick} value={'pemasukan'} style={{backgroundColor: '#ACB5E9', border: '2px solid rgba(0, 0, 0, 1)'}}>Pemasukan</button>
