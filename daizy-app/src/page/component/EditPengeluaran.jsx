@@ -2,9 +2,11 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux'
 // import { addPemasukan, editPemasukan } from "../../store/ListPemasukanSlice"
+import useUpdatePengeluaran from "../../hooks/useUpdatePengeluaran"
 
 export default function EditPengeluaran(props){
-    const [item] = props.item
+    const {updatePengeluaran, loadingUpdate} = useUpdatePengeluaran()
+    const {item} = props
     const [data, setData] = useState(item)
     // const dispatch = useDispatch(editPemasukan)
 
@@ -15,6 +17,19 @@ export default function EditPengeluaran(props){
         });
     };
 
+    const onEditPengeluaran = async(newItem) => {
+        await updatePengeluaran({variables: {
+            _eq : newItem.id,
+            _set: {
+                nama: newItem.nama,
+                nominal: newItem.nominal,
+                jenis: newItem.jenis,
+                tanggal: newItem.tanggal,
+                keterangan: newItem.keterangan
+            }
+        }})
+        alert("Data Berhasil Diperbarui")
+    };
     const handleChange = e => {
         setData({ ...data,
             [e.target.name]: e.target.value
@@ -22,39 +37,72 @@ export default function EditPengeluaran(props){
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        // console.log(data.nama)
-        const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, tanggal: data.tanggal, keterangan: data.keterangan}
-        // dispatch(editPemasukan(newItem))
+        console.log(data)
+        if(data.nama){
+            if(data.nominal){
+                if(data.jenis){
+                    if(data.tanggal){
+                        const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, jenis: data.jenis, tanggal: data.tanggal, keterangan: data.keterangan}
+                        onEditPengeluaran(newItem)
+                    }
+                    else{
+                        alert("Isi Tanggal Terlebih Dahulu")
+                    }
+                }
+                else{
+                    alert("Jangan Lupa Isi Jenis Pengeluaran")
+                }
+            }
+            else{
+                alert("Nominal Masih Kosong")
+            }
+        }
+        else{
+            alert("Nama Pemasukan Masih Kosong")
+        }
     }
     return(
-        <div className="addpemasukan">
-            <div className="title" style={{textAlign: 'center'}}>Pemasukan</div>
+        <div className="edit-pengeluaran">
+            <div className="title" style={{textAlign: 'center'}}>Pengeluaran</div>
             <div className='align-items-center justify-content-center' style={{display: 'flex'}}>
                 <div className="preform">
-                    <form 
-                    onSubmit={handleSubmit}
-                    >
-                            <div className="name">
+                    <form onSubmit={handleSubmit}>
+                        <div className="name">
+                            <label>
+                                Nama Pengeluaran
+                                <input type="text" name="nama" value={data.nama} onChange={handleChange} 
+                                className="input" />
+                            </label>
+                        </div>
+                        <div className="nominal">
+                            <label>
+                                Nominal Pengeluaran
+                                <input type="number" name="nominal" value={data.nominal} onChange={handleChange} 
+                                className="input" />
+                            </label>
+                        </div>
+                        <div className="jenis">
                                 <label>
-                                    Nama Pemasukan
-                                    <input type="text" required name="nama" value={data.nama} onChange={handleChange}
-                                    className="input" />
+                                    Jenis Pengeluaran
+                                    <select className="input" name="jenis" value={data.jenis} defaultValue={"default"} onChange={handleChange}
+                                    >
+                                        <option value="default">Pilih Jenis Pengeluaran</option>
+                                        <option value="Pekerjaan dan Belajar">Pekerjaan dan Belajar</option>
+                                        <option value="Komunikasi">Komunikasi</option>
+                                        <option value="Penampilan">Penampilan</option>
+                                        <option value="Makan dan Minum">Makan dan Minum</option>
+                                        <option value="Liburan">Liburan</option>
+                                        <option value="Lain-lain">Lain-lain</option>
+                                    </select>
                                 </label>
                             </div>
-                            <div className="nominal">
-                                <label>
-                                    Nominal Pemasukan
-                                    <input type="number" required name="nominal" value={data.nominal} onChange={handleChange} 
-                                    className="input" />
-                                </label>
-                            </div>
-                            <div className="tanggal">
-                                <label>
-                                    Tanggal Pemasukan
-                                    <input type="date" required name="tanggal" value={data.tanggal} onChange={handleChange} 
-                                    className="input" />
-                                </label>
-                            </div>
+                        <div className="tanggal">
+                            <label>
+                                Tanggal Pengeluaran
+                                <input type="date" name="tanggal" value={data.tanggal} onChange={handleChange} 
+                                className="input" />
+                            </label>
+                        </div>
                         <div className="keterangan">
                             <label>
                                 Keterangan
@@ -64,9 +112,12 @@ export default function EditPengeluaran(props){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' onClick={scrollToTop} className="button batal">Batal</Link>
-                            <input type="submit" value="Submit" className="submit"/>
-                            {/* <button onClick={handleSubmit}>submit</button> */}
+                            <Link to='/Home' onClick={scrollToTop}
+                            // onClick={resetData} 
+                            className="button batal">Batal</Link>
+                            <input type="submit" 
+                            // value="Submit" 
+                            className="submit"/>
                         </div>
                     </form>
                 </div>
