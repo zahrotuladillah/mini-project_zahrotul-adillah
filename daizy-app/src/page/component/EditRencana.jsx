@@ -1,13 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useState } from "react";
-import useAddRencana from "../../hooks/useAddRencana";
-import useGetRencana from "../../hooks/useGetRencana";
+import { useDispatch } from 'react-redux'
+// import { addPemasukan, editPemasukan } from "../../store/ListPemasukanSlice"
+import useUpdateRencana from "../../hooks/useUpdateRencana"
 
-export default function TambahRencana(){
-    const {addRencana, loadingAddRencana} = useAddRencana()
-    const [data, setData] = useState({nama: "", nominal: 0, bulan: "", tahun:0, keterangan: ""})
-    const {data: dataRencana, loading: loadingRencana, error: errorRencana, subsRencana} = useGetRencana()
+export default function EditRencana(props){
+    const {updateRecana, loadingUpdateRencana} = useUpdateRencana()
+    const {item} = props
+    const [data, setData] = useState(item)
+    // const dispatch = useDispatch(editPemasukan)
 
     const scrollToTop = () =>{
         window.scrollTo({
@@ -16,9 +17,10 @@ export default function TambahRencana(){
         });
     };
 
-    const onTambahRencana = async(newItem) => {
-        await addRencana({variables: {
-            object: {
+    const onEditRencana = async(newItem) => {
+        await updateRecana({variables: {
+            _eq: newItem.id,
+            _set: {
                 nama: newItem.nama,
                 nominal: newItem.nominal,
                 bulan: newItem.bulan,
@@ -26,7 +28,7 @@ export default function TambahRencana(){
                 keterangan: newItem.keterangan
             }
         }})
-        alert("Data Berhasil Ditambahkan")
+        alert("Data Berhasil Diperbarui")
     };
 
     const handleChange = e => {
@@ -34,7 +36,6 @@ export default function TambahRencana(){
             [e.target.name]: e.target.value
         })
     }
-
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(data)
@@ -42,23 +43,8 @@ export default function TambahRencana(){
             if(data.nominal){
                 if(data.bulan){
                     if(data.tahun){
-                        let beda=true
-                        dataRencana.map((item)=>{
-                            console.log(data.bulan, item.bulan, data.tahun, item.tahun)
-                            console.log(typeof data.bulan,typeof item.bulan, typeof data.tahun, typeof item.tahun)
-                            if(data.bulan===item.bulan&&data.tahun===`${item.tahun}`){
-                                beda=false
-                            }
-                        })
-                        console.log("beda?",beda)
-                        if(beda===true){
-                            const newItem = {nama: data.nama, nominal: data.nominal, bulan: data.bulan, tahun:data.tahun, keterangan: data.keterangan}
-                            onTambahRencana(newItem)
-                            setData({nama: "", nominal: 0, bulan: "", tahun:0, keterangan: ""})
-                        }
-                        else{
-                            alert("Rencana di Bulan Ini Sudah Ada")
-                        }
+                        const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, bulan: data.bulan, tahun:data.tahun, keterangan: data.keterangan}
+                        onEditRencana(newItem)
                     }
                     else{
                         alert("Isi Tahun Yaa..")
@@ -77,10 +63,10 @@ export default function TambahRencana(){
         }
     }
     return(
-        <div className="addrencana">
+        <div className="edit-rencana">
             <div className="title" style={{textAlign: 'center'}}>Rencana Tabungan</div>
             <div className='align-items-center justify-content-center' style={{display: 'flex'}}>
-                <div className="preform">
+                <div className="preform-edit">
                     <form onSubmit={handleSubmit}>
                         <div className="name">
                             <label>
@@ -118,11 +104,11 @@ export default function TambahRencana(){
                             </label>
                         </div>
                         <div className="tahun">
-                            <label>
-                                Tahun Rencana
-                                <input type="number" name="tahun" value={data.tahun} onChange={handleChange} 
-                                className="input" />
-                            </label>
+                        <label>
+                            Tahun Rencana
+                            <input type="number" name="tahun" value={data.tahun} onChange={handleChange} 
+                            className="input" />
+                        </label>
                         </div>
                         <div className="keterangan">
                             <label>
@@ -133,11 +119,9 @@ export default function TambahRencana(){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' onClick={scrollToTop}
-                            className="button kembali">Kembali</Link>
                             <input type="submit" 
                             // value="Submit" 
-                            className="submit"/>
+                            className="submit" style={{width: "100%"}}/>
                         </div>
                     </form>
                 </div>

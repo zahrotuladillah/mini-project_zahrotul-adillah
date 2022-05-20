@@ -1,11 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useState } from "react";
-import useAddPengeluaran from "../../hooks/useAddPengeluaran";
+import useUpdatePengeluaran from "../../hooks/useUpdatePengeluaran"
 
-export default function TambahPengeluaran(){
-    const {addPengeluaran, loadingAdd} = useAddPengeluaran()
-    const [data, setData] = useState({nama: "", nominal: 0, jenis:"", tanggal: "", keterangan: ""})
+export default function EditPengeluaran(props){
+    const {updatePengeluaran, loadingUpdate} = useUpdatePengeluaran()
+    const {item} = props
+    const [data, setData] = useState(item)
 
     const scrollToTop = () =>{
         window.scrollTo({
@@ -14,9 +14,10 @@ export default function TambahPengeluaran(){
         });
     };
 
-    const onTambahPengeluaran = async(newItem) => {
-        await addPengeluaran({variables: {
-            object: {
+    const onEditPengeluaran = async(newItem) => {
+        await updatePengeluaran({variables: {
+            _eq : newItem.id,
+            _set: {
                 nama: newItem.nama,
                 nominal: newItem.nominal,
                 jenis: newItem.jenis,
@@ -24,7 +25,7 @@ export default function TambahPengeluaran(){
                 keterangan: newItem.keterangan
             }
         }})
-        alert("Data Berhasil Ditambahkan")
+        alert("Data Berhasil Diperbarui")
     };
     const handleChange = e => {
         setData({ ...data,
@@ -38,9 +39,8 @@ export default function TambahPengeluaran(){
             if(data.nominal){
                 if(data.jenis){
                     if(data.tanggal){
-                        const newItem = {nama: data.nama, nominal: data.nominal, jenis: data.jenis, tanggal: data.tanggal, keterangan: data.keterangan}
-                        onTambahPengeluaran(newItem)
-                        setData({nama: "", nominal: 0, jenis:"", tanggal: "", keterangan: ""})
+                        const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, jenis: data.jenis, tanggal: data.tanggal, keterangan: data.keterangan}
+                        onEditPengeluaran(newItem)
                     }
                     else{
                         alert("Isi Tanggal Terlebih Dahulu")
@@ -59,7 +59,7 @@ export default function TambahPengeluaran(){
         }
     }
     return(
-        <div className="addpengeluaran">
+        <div className="edit-pengeluaran">
             <div className="title" style={{textAlign: 'center'}}>Pengeluaran</div>
             <div className='align-items-center justify-content-center' style={{display: 'flex'}}>
                 <div className="preform">
@@ -109,12 +109,8 @@ export default function TambahPengeluaran(){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' onClick={scrollToTop}
-                            // onClick={resetData} 
-                            className="button kembali">Kembali</Link>
-                            <input type="submit" 
-                            // value="Submit" 
-                            className="submit"/>
+                            <input type="submit"  
+                            className="submit" style={{width: "100%"}}/>
                         </div>
                     </form>
                 </div>

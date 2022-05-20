@@ -10,7 +10,6 @@ import Grafik from "./component/Grafik";
 import './style.css'
 
 // Routing ke setiap page
-// Untuk Page BuildHome akan mengirim props lists
 export default function Routing() {
   return (
     <Router>

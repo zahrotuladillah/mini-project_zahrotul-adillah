@@ -1,32 +1,25 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useDispatch } from 'react-redux'
-// import { addPemasukan } from "../../store/ListPemasukanSlice"
 
 import useAddPemasukan from "../../hooks/useAddPemasukan"
+import useUpdatePemasukan from "../../hooks/useUpdatePemasukan"
 
-export default function TambahPemasukan(){
-    const {addPemasukan, loadingAdd} = useAddPemasukan()
-    const [data, setData] = useState({nama: "", nominal: 0, tanggal: "", keterangan: ""})
-    // const dispatch = useDispatch(addPemasukan)
+export default function EditPemasukan(props){
+    const {updatePemasukan, loadingUppdate} = useUpdatePemasukan()
+    const {item} = props
+    const [data, setData] = useState(item)
 
-    const scrollToTop = () =>{
-        window.scrollTo({
-            top: 0, 
-            behavior: 'smooth'
-        });
-    };
-
-    const onTambahPemasukan = async(newItem) => {
-        await addPemasukan({variables: {
-            object: {
+    const onEditPemasukan = async(newItem) => {
+        await updatePemasukan({variables: {
+            _eq: newItem.id,
+            _set: {
                 nama: newItem.nama,
                 nominal: newItem.nominal,
                 tanggal: newItem.tanggal,
                 keterangan: newItem.keterangan
             }
         }})
-        alert("Data Berhasil Ditambahkan")
+        alert("Data Berhasil Diperbarui")
     };
 
     const handleChange = e => {
@@ -40,9 +33,8 @@ export default function TambahPemasukan(){
         if(data.nama){
             if(data.nominal){
                 if(data.tanggal){
-                    const newItem = {nama: data.nama, nominal: data.nominal, tanggal: data.tanggal, keterangan: data.keterangan}
-                    onTambahPemasukan(newItem)
-                    setData({nama: "", nominal: 0, tanggal: "", keterangan: ""})
+                    const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, tanggal: data.tanggal, keterangan: data.keterangan}
+                    onEditPemasukan(newItem)
                 }
                 else{
                     alert("Isi Tanggal Terlebih Dahulu")
@@ -57,7 +49,7 @@ export default function TambahPemasukan(){
         }
     }
     return(
-        <div className="addpemasukan">
+        <div className="edit">
             <div className="title" style={{textAlign: 'center'}}>Pemasukan</div>
             <div className='align-items-center justify-content-center' style={{display: 'flex'}}>
                 <div className="preform">
@@ -67,21 +59,21 @@ export default function TambahPemasukan(){
                             <div className="name">
                                 <label>
                                     Nama Pemasukan
-                                    <input type="text" name="nama" value={data.nama} onChange={handleChange}
+                                    <input type="text" value={data.nama} name="nama" onChange={handleChange}
                                     className="input" />
                                 </label>
                             </div>
                             <div className="nominal">
                                 <label>
                                     Nominal Pemasukan
-                                    <input type="number" name="nominal" value={data.nominal} onChange={handleChange} 
+                                    <input type="number" value={data.nominal} name="nominal" onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
                             <div className="tanggal">
                                 <label>
                                     Tanggal Pemasukan
-                                    <input type="date" name="tanggal" value={data.tanggal} onChange={handleChange} 
+                                    <input type="date" value={data.tanggal} name="tanggal" onChange={handleChange} 
                                     className="input" />
                                 </label>
                             </div>
@@ -94,8 +86,8 @@ export default function TambahPemasukan(){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' onClick={scrollToTop} className="button kembali">Kembali</Link>
-                            <input type="submit" value="Submit" className="submit"/>
+                            {/* <Link className="button batal">Tutup</Link> */}
+                            <input type="submit" value="Submit" className="submit" style={{width: "100%"}}/>
                             {/* <button onClick={handleSubmit}>submit</button> */}
                         </div>
                     </form>

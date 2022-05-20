@@ -187,11 +187,22 @@
 .filterbutton:hover{
     border: 2px solid rgba(0, 0, 0, 1)
 }
+.done-edit-button{
+    width: 100%;
+    height: 60px;
+    line-height: 60px; 
+    border-radius: 10px;
+    background-color: var(--green-color);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    margin-top: 3%;
+}
 
 /* Form */
 .addpemasukan{
     background-color: var(--first-color);
-    position: absolute;
+    position: relative;
     width: 100%;
 }
 .addpengeluaran{
@@ -203,6 +214,13 @@
     background-color: var(--third-color);
     position: absolute;
     width: 100%;
+}
+
+.edit{
+    margin: 3% auto 0 auto;
+    width: 80%;
+    background-color: var(--first-color);
+    position: absolute;
 }
 
 @media screen and (min-width: 481px){
@@ -265,7 +283,7 @@ textarea{
     border-radius: 7px;
     font-family: 'Montserrat', sans-serif;
 }
-.batal{
+.kembali{
     background: var(--red-color);
     transition: 0.2s all ease-in-out;
 }
@@ -281,27 +299,51 @@ textarea{
     background: var(--green-color);
     transition: 0.2s all ease-in-out;
 }
-.batal:hover, .submit:hover{
+.kembali:hover, .submit:hover{
     background: #171A2B;
     color: white; 
 }
 
 .switch-bulan{
-    font-size: 25px;
     font-weight: 700;
     margin-top: 5%;
     display: flex;
     justify-content: space-evenly;
 }
 .list{
-    margin-top: 5%;
     display: flex;
     justify-content: space-between;
-    padding: 1% 5%;
+    /* padding: 1% 5%; */
     border-radius: 10px;
     background-color: var(--first-color);
+    width: 85%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0 5%;
     font-size: 20px;
     font-weight: 600;
+}
+.item{
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+.delete-button{
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    width: 10%;
+    height: 60px;
+    line-height: 60px;
+    background-color: var(--red-color);
+    border-radius: 5px;
+}
+.delete-button:hover{
+    background-color: black;
+    color: white;
 }
 
 /* Grafik */
@@ -330,6 +372,11 @@ textarea{
 .grafik-rincian{
     text-align: center;
     margin-bottom: 3%;
+    font-size: 25px;
+}
+.title-rincian{
+    font-size: 30px;
+    margin: 10% 0;
 }
 .list-rincian{
     margin-top: 2%;
@@ -337,6 +384,80 @@ textarea{
     justify-content: space-between;
 }
 
+.edit-rencana{
+    background-color: var(--third-color);
+    margin: 3% auto 0 auto;
+    position: absolute;
+    width: 80%;
+}
+
+.preform-edit{
+    background-color: white;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+.edit-pengeluaran{
+    margin: 3% auto 0 auto;
+    width: 80%;
+    background-color: var(--second-color);
+    position: absolute;
+}
+
+.tohome{
+    width: 80%;
+    height: 60px;
+    line-height: 60px; 
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 3% auto;
+    transition: 0.2s all ease-in-out;
+}
+.tohome:hover{
+    background-color: black;
+    color: white;
+}
+.ket{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.teks{
+    text-align: center;
+    font-size: 35px;
+}
+.persen{
+    text-align: center;
+    font-size: 50px;
+}
+.input-grafik{
+    background-color: var(--input-color);
+    margin-top: 3%;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    height: 40px;
+    padding-left: 5px;
+    width: 300px;
+}
+.in{
+    font-size: 18px;
+}
+.in-button{
+    width: 15%;
+    height: 60px;
+    line-height: 60px; 
+    border-radius: 10px;
+    background-color: var(--green-color);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
 @media screen and (max-width: 480px) {
     /* Main */
     .title-fitur{
@@ -364,8 +485,11 @@ textarea{
     }
     .button{
         font-size: small;
-        width: 120px;
-        line-height: 20px;
+        width: 130px;
+    }
+    .submit{
+        font-size: small;
+        width: 130px;
     }
     .preform{
         padding: 5%;
@@ -430,15 +554,87 @@ textarea{
         width: 95px;
         text-align: center;
     }
-    .switch-bulan{
-        font-size: 13px;
-        font-weight: 800;
-    }
     .list{
         font-size: 12px;
         font-weight: 500;
         border-radius: 5px;
-        padding: 2% 3%;
+        padding: 0 3%;
+        height: 30px;
+        line-height: 30px;
+        width: 75%;
+    }
+    .delete-button{
+        height: 30px;
+        line-height: 30px;
+        font-size: 12px;
+        width: 20%;
+    }
+    .done-edit-button{
+        height: 30px;
+        line-height: 30px;
+        font-size: 15px;
+        border-radius: 5px;
+    }
+
+    /* Grafik */
+    .tohome{
+        color: white;
+        background-color: black;
+        height: 40px;
+        line-height: 40px;
+        font-size: 15px;
+    }
+    .title-grafik{
+        font-size: 20px;
+    }
+    .teks{
+        font-size: 15px;
+    }
+    .persen{
+        font-size: 25px;
+    }
+    .pie{
+        width: 150px;
+    }
+    .grafik-rincian{
+        font-size: 13px;
+    }
+    .title-rincian{
+        font-size: 18px;
+    }
+    .input-grafik{
+        width: 100px;
+    }
+    .in{
+        font-size: 13px;
+    }
+    .in-button{
+        width: 15%;
+        height: 40px;
+        line-height: 40px; 
+        font-size: 13px;
+    }
+}
+@media screen and (max-width:321px){
+    .preform-edit{
+        width: 100%;
+    }
+    .input{
+        width: 230px;
+    }
+    textarea{
+        width: 230px;
+    }
+}
+@media screen and (min-width: 322px) and (max-width:376px){
+    .preform-edit{
+        width: 100%;
+    }
+    .input{
+        width: 260px;
+    }
+    textarea{
+        width: 260px;
     }
 }
 @media screen and (min-width: 481px) and (max-width:1400px){
@@ -482,12 +678,17 @@ textarea{
         line-height: 30px;
         width: 30%;
     }
-    .switch-bulan{
-        font-size: 18px;
-        font-weight: 800;
-    }
     .list{
         font-size: 15px;
+        height: 40px;
+        line-height: 40px;
+        width: 80%;
+    }
+    .delete-button{
+        font-size: 15px;
+        height: 40px;
+        line-height: 40px;
+        width: 15%;
     }
     /* Main */
     .title-fitur{
@@ -498,5 +699,59 @@ textarea{
     }
     .deskripsi-fitur{
         font-size: 15px;
+    }
+    .done-edit-button{
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+    .tohome{
+        color: white;
+        background-color: black;
+        height: 50px;
+        line-height: 50px;
+    }
+    .title-grafik{
+        font-size: 25px;
+    }
+    .teks{
+        font-size: 20px;
+    }
+    .persen{
+        font-size: 25px;
+    }
+    .pie{
+        width: 180px;
+    }
+    .grafik-rincian{
+        font-size: 18px;
+    }
+    .title-rincian{
+        font-size: 23px;
+    }
+    .input-grafik{
+        width: 150px;
+    }
+    .in{
+        font-size: 13px;
+    }
+    .in-button{
+        width: 15%;
+        height: 50px;
+        line-height: 50px; 
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 750){
+    .teks{
+        font-size: 30px;
+    }
+    .persen{
+        font-size: 40px;
+    }
+    .pie{
+        width: 250px;
     }
 }
