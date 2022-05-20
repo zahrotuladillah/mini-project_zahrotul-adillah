@@ -81,9 +81,9 @@ export default function TambahPengeluaran(){
                         <div className="jenis">
                                 <label>
                                     Jenis Pengeluaran
-                                    <select className="input" name="jenis" value={data.jenis} defaultValue={"default"} onChange={handleChange}
+                                    <select className="input" name="jenis" value={data.jenis} onChange={handleChange}
                                     >
-                                        <option value="default">Pilih Jenis Pengeluaran</option>
+                                        <option value="">Pilih Jenis Pengeluaran</option>
                                         <option value="Pekerjaan dan Belajar">Pekerjaan dan Belajar</option>
                                         <option value="Komunikasi">Komunikasi</option>
                                         <option value="Penampilan">Penampilan</option>

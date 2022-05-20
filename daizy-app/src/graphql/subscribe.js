@@ -1,16 +1,5 @@
 import { gql } from "@apollo/client";
 
-// export const SubscribeData = gql`
-//     subscription subscribeDataSubscription {
-//         daftar_pengunjung {
-//             id
-//             nama
-//             umur
-//             jenisKelamin
-//         }
-//     }
-// `
-
 export const SubscribeDataPemasukan = gql`
     subscription subscribeDataPemasukan {
         pemasukan {
@@ -43,6 +32,7 @@ export const SubscribeDataRencana = gql`
             nama
             nominal
             bulan
+            tahun
             keterangan
         }
     }

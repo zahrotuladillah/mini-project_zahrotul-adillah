@@ -13,7 +13,7 @@ export default function useGetPemasukan(){
             }
         })
     }
-    console.log("hh", data)
+    // console.log("hh", data)
     return{
         data : data ? data.pemasukan : [],
         getload,

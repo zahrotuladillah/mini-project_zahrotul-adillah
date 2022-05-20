@@ -52,6 +52,7 @@ export default function List(props){
             nama: item.nama,
             nominal: item.nominal,
             bulan: item.bulan,
+            tahun: item.tahun,
             keterangan: item.keterangan
         })
     };
@@ -93,7 +94,6 @@ export default function List(props){
                     <div onClick={handleShowPengeluaran} className="list" style={{backgroundColor: '#F5ACA8'}}>
                         <div>{item.nama}</div>
                         <div>{item.tanggal}</div>
-                        <div>{item.jenis}</div>
                     </div>}
                     {filter==='rencana' && 
                     <div onClick={handleShowRencana} className="list" style={{backgroundColor: '#FBC3A5'}}>

@@ -24,6 +24,7 @@ export default function EditRencana(props){
                 nama: newItem.nama,
                 nominal: newItem.nominal,
                 bulan: newItem.bulan,
+                tahun: newItem.tahun,
                 keterangan: newItem.keterangan
             }
         }})
@@ -41,8 +42,13 @@ export default function EditRencana(props){
         if(data.nama){
             if(data.nominal){
                 if(data.bulan){
-                    const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, bulan: data.bulan, keterangan: data.keterangan}
-                    onEditRencana(newItem)
+                    if(data.tahun){
+                        const newItem = {id: data.id, nama: data.nama, nominal: data.nominal, bulan: data.bulan, tahun:data.tahun, keterangan: data.keterangan}
+                        onEditRencana(newItem)
+                    }
+                    else{
+                        alert("Isi Tahun Yaa..")
+                    }
                 }
                 else{
                     alert("Isi Tanggal Terlebih Dahulu")
@@ -62,41 +68,48 @@ export default function EditRencana(props){
             <div className='align-items-center justify-content-center' style={{display: 'flex'}}>
                 <div className="preform-edit">
                     <form onSubmit={handleSubmit}>
-                            <div className="name">
-                                <label>
-                                    Nama Rencana
-                                    <input type="text" name="nama" value={data.nama} onChange={handleChange} 
-                                    className="input" />
-                                </label>
-                            </div>
-                            <div className="nominal">
-                                <label>
-                                    Nominal Tabungan
-                                    <input type="number" name="nominal" value={data.nominal} onChange={handleChange} 
-                                    className="input" />
-                                </label>
-                            </div>
-                            <div className="bulan">
-                                <label>
-                                    Bulan Rencana
-                                    <select className="input" name="bulan" value={data.bulan} onChange={handleChange}
-                                        >
-                                            <option value="">Pilih Bulan</option>
-                                            <option value="Januari">Januari</option>
-                                            <option value="Februari">Februari</option>
-                                            <option value="Maret">Maret</option>
-                                            <option value="April">April</option>
-                                            <option value="Mei">Mei</option>
-                                            <option value="Juni">Juni</option>
-                                            <option value="Juli">Juli</option>
-                                            <option value="Agustus">Agustus</option>
-                                            <option value="September">September</option>
-                                            <option value="Oktober">Oktober</option>
-                                            <option value="November">November</option>
-                                            <option value="Desember">Desember</option>
-                                    </select>
-                                </label>
-                            </div>
+                        <div className="name">
+                            <label>
+                                Nama Rencana
+                                <input type="text" name="nama" value={data.nama} onChange={handleChange} 
+                                className="input" />
+                            </label>
+                        </div>
+                        <div className="nominal">
+                            <label>
+                                Nominal Tabungan
+                                <input type="number" name="nominal" value={data.nominal} onChange={handleChange} 
+                                className="input" />
+                            </label>
+                        </div>
+                        <div className="bulan">
+                            <label>
+                                Bulan Rencana
+                                <select className="input" name="bulan" value={data.bulan} onChange={handleChange}
+                                    >
+                                        <option value="">Pilih Bulan</option>
+                                        <option value="Januari">Januari</option>
+                                        <option value="Februari">Februari</option>
+                                        <option value="Maret">Maret</option>
+                                        <option value="April">April</option>
+                                        <option value="Mei">Mei</option>
+                                        <option value="Juni">Juni</option>
+                                        <option value="Juli">Juli</option>
+                                        <option value="Agustus">Agustus</option>
+                                        <option value="September">September</option>
+                                        <option value="Oktober">Oktober</option>
+                                        <option value="November">November</option>
+                                        <option value="Desember">Desember</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div className="tahun">
+                        <label>
+                            Tahun Rencana
+                            <input type="number" name="tahun" value={data.tahun} onChange={handleChange} 
+                            className="input" />
+                        </label>
+                        </div>
                         <div className="keterangan">
                             <label>
                                 Keterangan

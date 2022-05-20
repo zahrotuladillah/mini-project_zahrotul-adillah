@@ -1,25 +1,5 @@
 import { gql } from "@apollo/client";
 
-// KURANG UPDATE 
-
-// export const DeleteData = gql`
-//     mutation deleteDataMutation($id: Int!) {
-//         delete_daftar_pengunjung_by_pk(id: $id) {
-//             id
-//         }
-//     }
-// `
-
-// export const AddData = gql`
-//     mutation addDataMutation($object: daftar_pengunjung_insert_input!) {
-//         insert_daftar_pengunjung_one(object: $object) {
-//             id
-//             nama
-//             umur
-//             jenisKelamin
-//         }
-//     }
-// `
 export const AddDataPemasukan = gql`
     mutation AddDataPemasukan($object: pemasukan_insert_input!) {
         insert_pemasukan_one(object: $object) {
@@ -52,6 +32,7 @@ export const AddDataRencana = gql`
             nama
             nominal
             bulan
+            tahun
             keterangan
         }
     }
@@ -65,6 +46,7 @@ export const UpdateDataRencana = gql`
                 nama
                 nominal
                 bulan
+                tahun
                 keterangan
             }
         }
@@ -72,32 +54,32 @@ export const UpdateDataRencana = gql`
 `
 
 export const UpdateDataPengeluaran = gql`
-  mutation UpdateDataPengeluaran($_eq: Int!, $_set: pengeluaran_set_input!) {
-    update_pengeluaran(where: {id: {_eq: $_eq}}, _set: $_set) {
-      returning {
-        id
-        nama
-        nominal
-        jenis
-        tanggal
-        keterangan
-      }
+    mutation UpdateDataPengeluaran($_eq: Int!, $_set: pengeluaran_set_input!) {
+        update_pengeluaran(where: {id: {_eq: $_eq}}, _set: $_set) {
+            returning {
+                id
+                nama
+                nominal
+                jenis
+                tanggal
+                keterangan
+            }
+        }
     }
-  }
 `
 
 export const UpdateDataPemasukan = gql`
-  mutation UpdateDataPemasukan($_eq: Int!, $_set: pemasukan_set_input!) {
-    update_pemasukan(where: {id: {_eq: $_eq}}, _set: $_set) {
-      returning {
-        id
-        nama
-        nominal
-        tanggal
-        keterangan
-      }
+    mutation UpdateDataPemasukan($_eq: Int!, $_set: pemasukan_set_input!) {
+        update_pemasukan(where: {id: {_eq: $_eq}}, _set: $_set) {
+            returning {
+                id
+                nama
+                nominal
+                tanggal
+                keterangan
+            }
+        }
     }
-  }
 `
 
 export const DeleteDataPemasukan = gql`
