@@ -56,35 +56,29 @@ export default function List(props){
             keterangan: item.keterangan
         })
     };
-    // console.log("halo")
 
     const handleHapusPemasukan = () => {
-        // console.log("nyew", item.id)
         deletePemasukan({variables: {
             id: item.id
         }})
     }
 
     const handleHapusPengeluaran = () => {
-        // console.log("hem", item)
         deletePengeluaran({variables:{
             id: item.id
         }})
     }
     const handleHapusRencana = () => {
-        console.log("hem", item)
         deleteRencana({variables:{
             id: item.id
         }})
     }
-    console.log("yo", item)
     return(
         <>
             {show===false &&
                 <section className="item">
                     {filter==='pemasukan' && 
                     <div onClick={handleShowPemasukan}
-                    // to={{pathname: `/editPemasukan/${item.id}`, param: item}} 
                     className="list" style={{backgroundColor: '#ACB5E9'}}>
                         <div>{item.nama}</div>
                         <div>{item.tanggal}</div>
@@ -111,14 +105,14 @@ export default function List(props){
                     }
                 </section>
             }
+            {show===true && <div className="done-edit-button" onClick={handleClose}>Selesai</div>}    
             {show===true && 
                 <div>
                     <div>
-                        {filter==='pemasukan' && <EditPemasukan item={parameterPemasukan}/>} 
-                        {filter==='pengeluaran' && <EditPengeluaran item={parameterPengeluaran}/>}
-                        {filter==='rencana' && <EditRencana item={parameterRencana}/>}
+                        {filter==='pemasukan' && <EditPemasukan item={parameterPemasukan} behavior={handleClose}/>} 
+                        {filter==='pengeluaran' && <EditPengeluaran item={parameterPengeluaran} behavior={handleClose}/>}
+                        {filter==='rencana' && <EditRencana item={parameterRencana} behavior={handleClose}/>}
                     </div>
-                    <div onClick={handleClose} className="done-edit-button">Selesai</div>
                 </div>
             }
         </>

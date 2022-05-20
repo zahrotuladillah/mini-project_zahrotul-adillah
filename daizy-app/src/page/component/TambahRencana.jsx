@@ -134,7 +134,7 @@ export default function TambahRencana(){
 
                         <div className="footer">
                             <Link to='/Home' onClick={scrollToTop}
-                            className="button batal">Batal</Link>
+                            className="button kembali">Kembali</Link>
                             <input type="submit" 
                             // value="Submit" 
                             className="submit"/>

@@ -119,11 +119,9 @@ export default function EditRencana(props){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' onClick={scrollToTop}
-                            className="button batal">Batal</Link>
                             <input type="submit" 
                             // value="Submit" 
-                            className="submit"/>
+                            className="submit" style={{width: "100%"}}/>
                         </div>
                     </form>
                 </div>

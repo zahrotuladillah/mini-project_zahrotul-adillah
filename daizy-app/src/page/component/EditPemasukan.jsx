@@ -1,24 +1,13 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useDispatch } from 'react-redux'
-// import { addPemasukan } from "../../store/ListPemasukanSlice"
 
 import useAddPemasukan from "../../hooks/useAddPemasukan"
 import useUpdatePemasukan from "../../hooks/useUpdatePemasukan"
 
 export default function EditPemasukan(props){
-    // const {addPemasukan, loadingAdd} = useAddPemasukan()
     const {updatePemasukan, loadingUppdate} = useUpdatePemasukan()
     const {item} = props
     const [data, setData] = useState(item)
-    // const dispatch = useDispatch(addPemasukan)
-
-    // const scrollToTop = () =>{
-    //     window.scrollTo({
-    //         top: 0, 
-    //         behavior: 'smooth'
-    //     });
-    // };
 
     const onEditPemasukan = async(newItem) => {
         await updatePemasukan({variables: {
@@ -97,8 +86,8 @@ export default function EditPemasukan(props){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' className="button batal">Batal</Link>
-                            <input type="submit" value="Submit" className="submit"/>
+                            {/* <Link className="button batal">Tutup</Link> */}
+                            <input type="submit" value="Submit" className="submit" style={{width: "100%"}}/>
                             {/* <button onClick={handleSubmit}>submit</button> */}
                         </div>
                     </form>

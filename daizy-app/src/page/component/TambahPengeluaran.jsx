@@ -111,7 +111,7 @@ export default function TambahPengeluaran(){
                         <div className="footer">
                             <Link to='/Home' onClick={scrollToTop}
                             // onClick={resetData} 
-                            className="button batal">Batal</Link>
+                            className="button kembali">Kembali</Link>
                             <input type="submit" 
                             // value="Submit" 
                             className="submit"/>

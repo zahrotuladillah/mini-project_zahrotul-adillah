@@ -8,17 +8,17 @@ import useGetRencana from "../hooks/useGetRencana"
 
 export default function Home(){
     const [filter, setFilter] = useState('pemasukan')
-    // const {list_pemasukan, loadingDataPemasukan, errorDataPemasukan, subscribePemasukanFunction} = useGetDataPemasukan()
-    // const dataPemasukan = useSelector((state)=>state.listPemasukan.pemasukan)
-    // const dataPengeluaran = useSelector((state)=>state.list.pengeluaran)
-    // const dataRencana = useSelector((state)=>state.list.rencana)
-    // const {data, loading, error} = useQuery(GetPemasukan)
     const {data: dataPemasukan, loading: loadPemasukan, error: errorPemasukan, subsPemasukan} = useGetPemasukan() 
-    const {data: dataPengeluaran, loading: loadingPengelauran, error: errorPengeluaran, subsPengeluaran} = useGetPengeluaran()
+    const {data: dataPengeluaran, loading: loadingPengeluaran, error: errorPengeluaran, subsPengeluaran} = useGetPengeluaran()
     const {data: dataRencana, loading: loadingRencana, error: errorRencana, subsRencana} = useGetRencana()
-    // useEffect(()=>{
-    //     subscribePemasukanFunction()
-    // },[])
+
+    const scrollToTop = () =>{
+        window.scrollTo({
+            top: 0, 
+            behavior: 'smooth'
+        });
+    };
+
     useEffect(()=>{
         subsPemasukan()
     },[])
@@ -40,6 +40,7 @@ export default function Home(){
     
     return(
         <div>
+            {loadPemasukan===true && <div>Loading</div>}
             <section className="home second">
                 <div className="home-content">
                     <div className="textp-1">Pantau Keuanganmu</div>
@@ -53,9 +54,9 @@ export default function Home(){
             </section>
             <img src="./waveatas.png" style={{width: '100%', marginTop: '-5px'}}/>
             <div className="max-width">
-                {filter==='pemasukan' && <Link to='/TambahPemasukan' style={{display: 'grid'}} className="tambahbutton" >Tambah Pemasukan</Link>}
-                {filter==='pengeluaran' && <Link to='/TambahPengeluaran' style={{display: 'grid'}} className="tambahbutton" >Tambah Pengeluaran</Link>}
-                {filter==='rencana' && <Link to='/TambahRencana' style={{display: 'grid'}} className="tambahbutton" >Tambah Rencana</Link>}
+                {filter==='pemasukan' && <Link to='/TambahPemasukan' style={{display: 'grid'}} className="tambahbutton" onClick={scrollToTop}>Tambah Pemasukan</Link>}
+                {filter==='pengeluaran' && <Link to='/TambahPengeluaran' style={{display: 'grid'}} className="tambahbutton" onClick={scrollToTop}>Tambah Pengeluaran</Link>}
+                {filter==='rencana' && <Link to='/TambahRencana' style={{display: 'grid'}} className="tambahbutton" onClick={scrollToTop}>Tambah Rencana</Link>}
                 <div className="filter">
                     {filter==='pemasukan'
                     ? <button className="filterbutton" onClick={handleClick} value={'pemasukan'} style={{backgroundColor: '#ACB5E9', border: '2px solid rgba(0, 0, 0, 1)'}}>Pemasukan</button>
@@ -68,18 +69,11 @@ export default function Home(){
                     : <button className="filterbutton" onClick={handleClick} value={'rencana'} style={{backgroundColor: '#FBC3A5'}}>Rencana</button>}
                     
                 </div>
-                <div className="switch-bulan">
-                    <div>arrowleft</div>
-                    <div>Bulan</div>
-                    <div>ArrowRight</div>
-                </div>
                 <section style={{marginBottom: '10%'}}>
-                    {/* {console.log("hlo")} */}
-                    {/* {list_pemasukan?.pemasukan && console.log("hwe")} */}
                     {filter==='pemasukan' && dataPemasukan.map(income => (<List key={income.id} item={income} filter='pemasukan'/>))}
                     {filter==='pengeluaran' && dataPengeluaran.map((outcome) => (<List key={outcome.id} item={outcome} filter='pengeluaran'/>))}
                     {filter==='rencana' && dataRencana.map((plan) => (<List key={plan.id} item={plan} filter='rencana'/>))}
-                    {filter==='pemasukan' && dataPemasukan.length===0 &&
+                    { loadPemasukan===false && filter==='pemasukan' && dataPemasukan.length===0 &&
                         <div className="list" style={{display: "block", textAlign: "center", marginTop: '3%', color: "red", width: "100%", backgroundColor: '#F5ACA8'}}>
                             Belum Ada Pemasukan
                         </div>
@@ -95,6 +89,7 @@ export default function Home(){
                         </div>
                     }
                 </section>
+                <div>Note : Klik Untuk Mengedit</div>
             </div>
         </div>
     )

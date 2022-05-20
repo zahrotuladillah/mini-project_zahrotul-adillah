@@ -4,38 +4,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import useGetPemasukan from "../../hooks/useGetPemasukan";
 import useGetPengeluaran from "../../hooks/useGetPengeluaran";
 import useGetRencana from "../../hooks/useGetRencana";
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
 import Pie from "./Pie";
-
-// import useSumPemasukan from "../../hooks/useSumPemasukan";
-// import useSumPengeluaran from "../../hooks/useSumPengeluaran";
-// import useSumRencana from "../../hooks/useSumRencana";
-
-// const JumlahPemasukan = gql`
-//     query jumlahPemasukan($_gte: date!, $_lte: date!) {
-//         pemasukan_aggregate(where: {tanggal: {_gte: $_gte, _lte: $_lte}}) {
-//             aggregate {
-//                 sum {
-//                     nominal
-//                 }
-//             }
-//         }
-//     }
-// `
+import { Link } from "react-router-dom";
 
 export default function Grafik(){
     const {data: dataPemasukan, loading: loadPemasukan, error: errorPemasukan, subsPemasukan} = useGetPemasukan() 
     const {data: dataPengeluaran, loading: loadingPengelauran, error: errorPengeluaran, subsPengeluaran} = useGetPengeluaran()
     const {data: dataRencana, loading: loadingRencana, error: errorRencana, subsRencana} = useGetRencana()
 
-    // const {sumPemasukan, loadingSumPemasukan} = useSumPemasukan()
-    // const {sumPengeluaran, loadingSumPengeluaran} = useSumPengeluaran()
-    // const {sumRencana, loadingSumRencana} = useSumRencana()
-
-    // const {jumlahPemasukan, data: dataJumlahPemasukan, loading: loadJmlPemasukan, error: errJmlPemasukan} = useQuery(JumlahPemasukan)
-    
-    // console.log("datamasuk", dataJumlahPemasukan)
     const [date, setDate] = useState("")
     const [tahun, setTahun] = useState(0)
     const [bulan, setBulan] = useState("")
@@ -47,18 +23,11 @@ export default function Grafik(){
     const [persenHasil, setPersenHasil] = useState(0)
     const [persenRencana, setPersenRencana] = useState(0)
     const [tabungan, setTabungan] = useState(0)
-    const [isFirst, setIsFirst] = useState(true)
     const [persenJenis, setPersenJenis] = useState([])
-    // const [show, setShow] = useState(false)
 
     const months = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
         "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
 
-    // const selectedMonthName = months[value['month']];
-    // const d = new Date();
-    // let namaaBulan = months[d.getMonth()];
-    // getFullYear()
-    // console.log(months[1])
     useEffect(()=>{
         subsPemasukan()
     },[])
@@ -70,6 +39,14 @@ export default function Grafik(){
     useEffect(()=>{
         subsRencana()
     },[])
+
+
+    const scrollToTop = () =>{
+        window.scrollTo({
+            top: 0, 
+            behavior: 'smooth'
+        });
+    };
 
 
     let temp = 0
@@ -102,11 +79,9 @@ export default function Grafik(){
             selesai = "30"
         }
 
-        // console.log("thn", tahunDipilih)
 
         if(bulanDipilih<10){
             bulanDipilih = "0".concat(bulanDipilih)
-            // console.log("bulanpilih",bulanDipilih)
         }
         const tanggalMulai = tahunDipilih.concat("-",bulanDipilih,"-",mulai);
         const tanggalSelesai = tahunDipilih.concat("-",bulanDipilih,"-",selesai);
@@ -115,22 +90,18 @@ export default function Grafik(){
         let sumPengeluaran = 0
         
         dataPemasukan.forEach((item)=>{
-            // console.log("masukan",item.tanggal, tanggalMulai, tanggalSelesai)
             if(item.tanggal>=tanggalMulai && item.tanggal<=tanggalSelesai){
-                // console.log("masukan", item.nominal)
                 sumPemasukan += item.nominal
             }
         })
 
         dataPengeluaran.forEach((item)=>{
-            // console.log("keluaran",item.tanggal, tanggalMulai, tanggalSelesai)
             if(item.tanggal>=tanggalMulai && item.tanggal<=tanggalSelesai){
                 sumPengeluaran += item.nominal
             }
         })
 
         dataPengeluaran.forEach((item)=>{
-            // console.log("keluaran",item.tanggal, tanggalMulai, tanggalSelesai)
             if(item.tanggal>=tanggalMulai && item.tanggal<=tanggalSelesai){
                 JenisPengeluaran.forEach((item1, i)=>{
                     jenis[i]=0
@@ -148,17 +119,12 @@ export default function Grafik(){
             }
         })
 
-        // console.log("masuk", sumPemasukan)
-        // console.log("keluar", sumPengeluaran)
-        // persenJenis.push(jenis)
-        // console.log(persenJenis)
         selisih = sumPemasukan-sumPengeluaran
         console.log("sls", selisih)
         if(sumPengeluaran<sumPemasukan){
             temp = sumPengeluaran/sumPemasukan*100
         }
         else{
-            // console.log("selisih",selisih)
             temp = sumPengeluaran/selisih*100
         }
         jenis.forEach((item,i)=>{
@@ -331,8 +297,6 @@ export default function Grafik(){
         fungsiHitung(bulanRencana, tahunRencana)
         console.log(selisih)
         setTabungan(selisih)
-        // console.log(selisih)
-        // let temprencana = selisih/nominalRencana*100
         setPersenRencana(temprencana)
         console.log(temprencana)
         if(temprencana<0){
@@ -350,76 +314,75 @@ export default function Grafik(){
     return(
         <div className="grafik">
             <div className="title-grafik" style={{textAlign: 'center'}}>GRAFIK KEUANGAN</div>
-            {/* <div className='align-items-center justify-content-center' style={{display: 'flex'}}> */}
-                <div className="box-grafik">
-                    <div className="switch-bulan" style={{marginTop: '0'}}>
-                        <label>
-                            Pilih Tahun
-                            <select required className="input" name="tahun" value={tahun} onChange={handleChangeTahun}>
-                                {DataTahun.map(MakeItemth)}
-                            </select>
-                        </label>
-                        <label>
-                            Pilih Bulan (isi tahun dulu)
-                            <select required className="input" name="tahun" value={bulan} onChange={handleChangeBulan}>
-                                {DataBulan.map(MakeItembln)}
-                            </select>
-                        </label>
-                        <div onClick={handleFilter}>Apply</div>
-                    </div>
-                    <div className="grafik-keuangan">
-                        <div><Pie value={persenHasil} ifMin={ifMin}/></div>
-                        <div>
-                            <div>Pengeluaran</div>
-                            <div>{persenHasil}%</div>
-                            <div>Pemasukan</div>
-                        </div>
-                    </div>
-                    <div className="grafik-rincian">
-                        <div>Jenis Pengeluaran</div>
-                        {JenisPengeluaran.map(MakeItemJenis )}
+            <div className="box-grafik">
+                <div className="switch-bulan" style={{marginTop: '0'}}>
+                    <label className="in">
+                        Pilih Tahun
+                        <select required className="input-grafik" name="tahun" value={tahun} onChange={handleChangeTahun}>
+                            {DataTahun.map(MakeItemth)}
+                        </select>
+                    </label>
+                    <label className="in">
+                        Pilih Bulan (isi tahun)
+                        <select required className="input-grafik" name="tahun" value={bulan} onChange={handleChangeBulan}>
+                            {DataBulan.map(MakeItembln)}
+                        </select>
+                    </label>
+                    <div onClick={handleFilter} className="in-button">Apply</div>
+                </div>
+                <div className="grafik-keuangan">
+                    <div><Pie value={persenHasil} ifMin={ifMin}/></div>
+                    <div className="ket">
+                        <div className="teks">Pengeluaran</div>
+                        <div className="persen">{persenHasil}%</div>
+                        <div className="teks">Pemasukan</div>
                     </div>
                 </div>
-                <div className="title-grafik" style={{textAlign: 'center'}}>HASIL PERENCANAAN</div>
-                <div className="box-grafik">
-                    <div className="switch-bulan" style={{marginTop: '0'}}>
-                        <label>
-                            Pilih Tahun
-                            <select required className="input" name="tahun" value={tahunRencana} onChange={handleChangeTahunRencana}>
-                                {DataTahunRencana.map(MakeItemRth)}
-                            </select>
-                        </label>
-                        <label>
-                            Pilih Bulan (isi tahun dulu)
-                            <select required className="input" name="tahun" value={bulanRencana} onChange={handleChangeBulanRencana}>
-                                {DataBulanRencana.map(MakeItemRbln)}
-                            </select>
-                        </label>
-                        <div onClick={handleNominalRencana}>Apply</div>
-                    </div>
-                    <div className="grafik-keuangan">
-                    <div><Pie value={persenRencana} ifMin={ifMinRencana}/></div>
-                        <div>
-                            <div>Tabungan</div>
-                            <div>{persenRencana}%</div>
-                            <div>Rencana Tabungan</div>
-                        </div>
-                    </div>
-                    <div className="grafik-rincian">
-                        <div>Rencana</div>
-                        <div className="list-rincian">
-                            <div>Rencana Tabungan</div> 
-                            <div>
-                                {nominalRencana}
-                            </div>
-                        </div>
-                        <div className="list-rincian">
-                            <div>Tabungan</div> 
-                            <div>{tabungan}</div>
-                        </div>
-                    </div>
-                {/* </div> */}
+                <div className="grafik-rincian">
+                    <div className="title-rincian">Jenis Pengeluaran</div>
+                    {JenisPengeluaran.map(MakeItemJenis )}
+                </div>
             </div>
+            <div className="title-grafik" style={{textAlign: 'center'}}>HASIL PERENCANAAN</div>
+            <div className="box-grafik">
+                <div className="switch-bulan" style={{marginTop: '0'}}>
+                    <label className="in">
+                        Pilih Tahun
+                        <select required className="input-grafik" name="tahun" value={tahunRencana} onChange={handleChangeTahunRencana}>
+                            {DataTahunRencana.map(MakeItemRth)}
+                        </select>
+                    </label >
+                    <label className="in">
+                        Pilih Bulan (isi tahun)
+                        <select required className="input-grafik" name="tahun" value={bulanRencana} onChange={handleChangeBulanRencana}>
+                            {DataBulanRencana.map(MakeItemRbln)}
+                        </select>
+                    </label>
+                    <div onClick={handleNominalRencana} className="in-button">Apply</div>
+                </div>
+                <div className="grafik-keuangan">
+                <div><Pie value={persenRencana} ifMin={ifMinRencana}/></div>
+                    <div className="ket">
+                        <div className="teks">Tabungan</div>
+                        <div className="persen">{persenRencana}%</div>
+                        <div className="teks">Rencana Tabungan</div>
+                    </div>
+                </div>
+                <div className="grafik-rincian">
+                    <div className="title-rincian">Rencana</div>
+                    <div className="list-rincian">
+                        <div>Rencana Tabungan</div> 
+                        <div>
+                            {nominalRencana}
+                        </div>
+                    </div>
+                    <div className="list-rincian">
+                        <div>Tabungan</div> 
+                        <div>{tabungan}</div>
+                    </div>
+                </div>
+            </div>
+            <Link to='/Home' className="tohome" style={{display: 'grid'}} onClick={scrollToTop}>Kembali ke Home</Link>
         </div>
     )
 }

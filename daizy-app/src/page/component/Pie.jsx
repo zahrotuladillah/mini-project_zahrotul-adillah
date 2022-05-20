@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 
 export default function Pie (props){
@@ -17,7 +16,7 @@ export default function Pie (props){
                     fontSize: "5px"
                 }}
                 animate={true}
-            />
+            className="pie"/>
         }
         {ifMin === 2 
         &&
@@ -31,7 +30,7 @@ export default function Pie (props){
                     fontSize: "5px"
                 }}
                 animate={true}
-            />
+            className="pie"/>
         }
         {ifMin === 3
         &&
@@ -45,7 +44,7 @@ export default function Pie (props){
                     fontSize: "5px"
                 }}
                 animate={true}
-            />
+            className="pie"/>
             
         }
         </div>

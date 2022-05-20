@@ -94,7 +94,7 @@ export default function TambahPemasukan(){
                         </div>
 
                         <div className="footer">
-                            <Link to='/Home' onClick={scrollToTop} className="button batal">Batal</Link>
+                            <Link to='/Home' onClick={scrollToTop} className="button kembali">Kembali</Link>
                             <input type="submit" value="Submit" className="submit"/>
                             {/* <button onClick={handleSubmit}>submit</button> */}
                         </div>
